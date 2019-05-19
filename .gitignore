@@ -1,0 +1,6 @@
+.envrc
+.idea
+
+node_modules
+logs/*
+
