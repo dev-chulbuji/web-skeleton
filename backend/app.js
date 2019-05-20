@@ -6,6 +6,7 @@ const PORT = process.env.PORT || config.PORT
 
 const winston = require('winston')
 const accessMiddleware = require(`./middlewares/access`)
+const mongo = require(`./database/mongo`)
 
 app.use(accessMiddleware.access)
 require('./routes').routes(app)
