@@ -24,10 +24,6 @@
 import { mapMutations } from 'vuex'
 
 export default {
-  components: {
-  },
-  data() {
-  },
   methods: {
     ...mapMutations(['toggleMini']),
   }
