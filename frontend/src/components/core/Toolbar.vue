@@ -25,7 +25,7 @@ import { mapMutations } from 'vuex'
 
 export default {
   methods: {
-    ...mapMutations(['toggleMini']),
+    ...mapMutations('app', ['toggleMini']),
   }
 };
 </script>

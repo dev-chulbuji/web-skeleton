@@ -2,7 +2,7 @@
    <v-navigation-drawer
       v-model="drawer"
       fixed
-      :mini-variant.sync="this.$store.state.mini"
+      :mini-variant.sync="this.$store.state.app.mini"
       app>
       <v-toolbar flat class="transparent">
           <v-list class="pa-0">
@@ -51,7 +51,6 @@
     data() {
       return {
         drawer: null,
-        siteDark: false
       };
     }
   }
