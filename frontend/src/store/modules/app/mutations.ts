@@ -1,7 +1,5 @@
-import state from './state'
-
 export default {
-  toggleMini: function () {
+  toggleMini: (state: any) => {
     state.mini = !state.mini
   }  
 }

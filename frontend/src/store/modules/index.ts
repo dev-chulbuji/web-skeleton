@@ -1,10 +1,7 @@
 const requireModule = require.context('.', true, /\.ts$/)
 const modules = {}
 
-console.log(requireModule)
-
 requireModule.keys().forEach(fileName => {
-  console.log(fileName)
   if (fileName === './index.ts') return
 
   // Replace ./ and .ts
@@ -19,7 +16,5 @@ requireModule.keys().forEach(fileName => {
 
   modules[moduleName][imported] = requireModule(fileName).default
 })
-
-console.log(modules)
 
 export default modules

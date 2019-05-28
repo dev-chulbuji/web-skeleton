@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
 import paths from './paths'
 import IRoute from './interface'
 
@@ -10,9 +9,7 @@ const route = (option: IRoute) => {
   return {
     name: name || view,
     path,
-    component: (resovle: any) => import(
-      `@/views/${view}.vue`
-    ).then(resovle)
+    component: (resovle: any) => import(`@/views/${view}.vue`).then(resovle)
   }
 }
 
