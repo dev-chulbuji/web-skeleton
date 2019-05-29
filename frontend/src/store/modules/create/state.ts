@@ -1,4 +1,5 @@
 export default {
+	loading: false,
 	request: {
 		incidentNum: '',
 		symptom: {
@@ -62,6 +63,19 @@ export default {
 			rules: [(v: any) => !!v || '필수입력 사항입니다.']
 		},
 		finder: {
+			value: '',
+			rules: [(v: any) => !!v || '필수입력 사항입니다.']
+		},
+
+
+
+
+
+		title: {
+			value: '',
+			rules: [(v: any) => !!v || '필수입력 사항입니다.']
+		},
+		content: {
 			value: '',
 			rules: [(v: any) => !!v || '필수입력 사항입니다.']
 		},

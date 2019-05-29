@@ -25,11 +25,13 @@ export default Vue.extend({
     }
   },
   methods: {
-    ...mapMutations("incidents", ["setSelectedItems"]),
+    ...mapMutations('incidents', ['setSelectedItems']),
     onClickCreateItem() {
       this.$router.push("/create");
     },
-    onClickDeleteItem() {}
+    onClickDeleteItem() {
+
+    }
   }
 });
 </script>

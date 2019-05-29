@@ -12,15 +12,15 @@
 					<v-layout wrap justify-space-between>
 						<v-flex xs12 d-block>
 							<v-text-field
+								disabled
 								type="text" label="title"
-								:rules="getRequest.title.rules"
-								v-model="getRequest.title.value"/>
+								v-model="item.title"/>
 						</v-flex >
 						<v-flex xs12 d-block>
 							<v-text-field
+								disabled
 								type="text" label="content"
-								:rules="getRequest.content.rules"
-								v-model="getRequest.content.value"/>
+								v-model="item.content"/>
 						</v-flex>
 					</v-layout>
 					<!-- <v-layout wrap justify-space-between>
@@ -213,12 +213,8 @@
 					<v-layout>
 						<v-spacer></v-spacer>
 						<v-btn color="error" dark @click="cancel">
-							Cancel
+							Incidents List
 							<v-icon right dark>cancel</v-icon>
-						</v-btn>
-						<v-btn color="primary" dark @click="create">
-							Create Incident
-							<v-icon right dark>check_circle</v-icon>
 						</v-btn>
 					</v-layout>
 				</v-form>
@@ -231,29 +227,27 @@
 	import {mapActions, mapGetters, mapMutations} from 'vuex'
 
 	export default {
-		name: 'CreateIncident',
-		data() {
-			return {
-				dp1: '',
-				dp2: '',
-				dp3: '',
-				dp4: '',
-			}
-		},
+		name: 'DetailIncident',
 		beforeMount() {
 			this.initData()
 		},
+		mounted() {
+			this.getData()
+		},
 		computed: {
-			...mapGetters('create', ['getRequest'])
+			...mapGetters('detail', ['getItem']),
+			item: {
+				get() {
+					return this.getItem
+				},
+				set(payload) {
+					this.setItem(payload)
+				}
+			}
 		},
 		methods: {
-			...mapActions('create', ['createItem']),
-			...mapMutations('create', ['initData']),
-			create() {
-				if (this.$refs.form.validate()) {
-					this.createItem()
-				}
-			},
+			...mapMutations('detail', ['setItem']),
+			...mapActions('detail', ['getData', 'initData']),
 			cancel() {
 				this.$router.replace(this.$route.query.redirect || '/')
 			}
