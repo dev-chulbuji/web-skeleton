@@ -1,6 +1,7 @@
 const items = []
 for(i = 0; i < 100; i ++) {
 	items.push({
+		idx: i,
 		title: `title${i}`,
 		content: `content${i}`
 	})
@@ -9,7 +10,7 @@ for(i = 0; i < 100; i ++) {
 exports.gets = async (req, res, next) => {
 	const { page, perPage } = req.params
 	res.json({
-		items: items.slice((page - 1) * perPage, page * perPage),
+		items: items.sort((a, b) => b.idx - a.idx).slice((page - 1) * perPage, page * perPage),
 		currentPage: page,
 		totalSize: items.length,
 	})
@@ -24,7 +25,13 @@ exports.put = async (req, res, next) => {
 }
 
 exports.post = async (req, res, next) => {
-	res.json(`create incident`)
+	const { title, content } = req.body
+	const idx = items.length
+	const item = { idx, title, content }
+
+	items.push(item)
+	
+	res.json(item.idx)
 }
 
 exports.delete = async (req, res, next) => {
