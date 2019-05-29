@@ -10,6 +10,10 @@ const paths: IRoute[] = [
     view: 'Create'
   },
   {
+    path: '/detail',
+    view: 'Detail'
+  },
+  {
     path: '/analytics',
     view: 'Analytics'
   },
