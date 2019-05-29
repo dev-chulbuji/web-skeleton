@@ -1,16 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 	<v-card class="elevation-1">
-		<v-toolbar flat color="white" style="padding-top: 9px">
-			<v-toolbar-title>Manage Incidents</v-toolbar-title>
-			<v-spacer></v-spacer>
-			<v-btn color="error" dark @click="onClickDeleteItem" v-if="visibilityDeleteBtn">
-				delete incident
-			</v-btn>
-			<v-btn color="primary" dark @click="onClickCreateItem">
-				create incident
-			</v-btn>
-		</v-toolbar>
-
+		
+		<incident-control-btn></incident-control-btn>
 		<search-incident></search-incident>
 
 		<v-data-table
@@ -39,7 +30,6 @@
 
 <script>
 	import {mapActions, mapGetters, mapMutations} from 'vuex'
-
 	export default {
 		name: 'Incident',
 		data() {
@@ -80,21 +70,10 @@
 					this.setSelectedItems(value)
 				}
 			},
-			visibilityDeleteBtn: {
-				get() {
-					return this.selectedItems.length > 0
-				}
-			}
 		},
 		methods: {
 			...mapMutations('incidents', ['setPagination', 'setPaginationPage', 'setSearchTitle', 'setSelectedItems']),
 			...mapActions('incidents', ['getHeader', 'getData']),
-			onClickCreateItem() {
-				this.$router.push('/create')
-			},
-			onClickDeleteItem() {
-
-			},
 		}
 	}
 </script>
