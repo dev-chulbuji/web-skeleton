@@ -17,7 +17,11 @@ exports.gets = async (req, res, next) => {
 }
 
 exports.get = async (req, res, next) => {
-	res.json(`get incident by id`)
+	const { id } = req.params
+	console.log(`idx :: ${id}`)
+	const item = items.find(x => x.idx === Number.parseInt(id))
+	console.log(item)
+	res.json(item)
 }
 
 exports.put = async (req, res, next) => {
