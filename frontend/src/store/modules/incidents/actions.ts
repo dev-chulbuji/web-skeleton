@@ -2,18 +2,20 @@ import IPage from "@/interface/IPage";
 import api from "@/utils/api";
 
 export default {
-  init: async ({commit}: any, { page, perPage }: IPage) => {
-    commit('initData', { page, perPage })
+  getHeader: async ({commit}: any) => {
+    commit('initData')
   },
-  data: async ({ commit, getters }: any) => {
-    const { page, perPage } = getters.getPagination
+  getData: async ({ commit, getters }: any) => {
+    const { page, rowsPerPage, sortBy } = getters.getPagination
+    const searchTitle = getters.getSearchTitle
 
     commit('setLoading', true)
 
-    const items = await api.get(`/incidents/${page}/${perPage}`)
+    const response = await api.get(`/incidents/${page}/${rowsPerPage}`)
+    const { items, currentPage, totalSize } = response.data
 
-    commit('setItems', items.data)
-    commit('setTotal', 100)
+    commit('setItems', items)
+    commit('setTotal', totalSize)
     commit('setLoading', false)
   }
 }

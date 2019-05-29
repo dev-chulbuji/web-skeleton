@@ -1,54 +1,69 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-	<v-container fluid fill-height class="grey lighten-4">
+	<v-card class="elevation-1">
+		<v-toolbar flat color="white" style="padding-top: 9px">
+			<v-toolbar-title>Manage Incidents</v-toolbar-title>
+			<v-spacer></v-spacer>
+			<v-btn color="error" dark @click="onClickDeleteItem" v-if="visibilityDeleteBtn">
+				delete incident
+			</v-btn>
+			<v-btn color="primary" dark @click="onClickCreateItem">
+				create incident
+			</v-btn>
+		</v-toolbar>
 
-		<v-fade-transition mode="out-in">
-			<v-data-table class="elevation-1"
-											:headers="getHeaders"
-											:items="getItems"
-											:pagination.sync="pagination"
-											:total-items="getTotal"
-											:loading="isLoading">
-					<template v-slot:items="props">
-						<td class="text-xs-center">{{ props.item.title }}</td>
-						<td class="text-xs-center">{{ props.item.content}}</td>
-						<td class="text-xs-center">
-							<v-tooltip top>
-								<template v-slot:activator="{ on }">
-									<v-btn fab dark small color="success"
-												 v-on="on"
-												 @click.stop="handleViewClick(props.item)">
-										<v-icon dark>email</v-icon>
-									</v-btn>
-								</template>
-								<span>email 확인</span>
-							</v-tooltip>
-						</td>
-					</template>
-				</v-data-table>
-		</v-fade-transition>
-	</v-container>
+		<search-incident></search-incident>
+
+		<v-data-table
+			:headers="getHeaders"
+			:items="getItems"
+			:pagination.sync="pagination"
+			:total-items="getTotal"
+			:loading="isLoading"
+			item-key="title"
+			v-model="selectedItems"
+			select-all>
+			<template v-slot:items="props">
+				<td>
+					<v-checkbox
+						v-model="props.selected"
+						primary
+						hide-details
+					></v-checkbox>
+				</td>
+				<td>{{ props.item.title }}</td>
+				<td>{{ props.item.content}}</td>
+			</template>
+		</v-data-table>
+	</v-card>
 </template>
 
 <script>
 	import {mapActions, mapGetters, mapMutations} from 'vuex'
 
 	export default {
+		name: 'Incident',
+		data() {
+			return {
+				selected: []
+			}
+		},
 		beforeMount() {
-			this.init()
+			this.getHeader()
 		},
 		mounted() {
-			this.data()
+			this.getData()
 		},
 		watch: {
 			pagination: {
 				handler() {
-					this.data()
+					this.getData()
 				},
 				deep: true
 			}
 		},
 		computed: {
-			...mapGetters('incidents', ['getHeaders', 'getItems', 'getPagination', 'getTotal', 'isLoading']),
+			...mapGetters('incidents', ['getHeaders', 'getItems', 'getSelectedItems',
+				'getPagination', 'getTotal', 'getSearchTitle', 'isLoading']),
 			pagination: {
 				get() {
 					return this.getPagination
@@ -56,11 +71,30 @@
 				set(pagination) {
 					this.setPagination(pagination)
 				}
+			},
+			selectedItems: {
+				get() {
+					return this.getSelectedItems
+				},
+				set(value) {
+					this.setSelectedItems(value)
+				}
+			},
+			visibilityDeleteBtn: {
+				get() {
+					return this.selectedItems.length > 0
+				}
 			}
 		},
 		methods: {
-			...mapMutations('incidents', ['setPagination']),
-			...mapActions('incidents', ['init', 'data']),
+			...mapMutations('incidents', ['setPagination', 'setPaginationPage', 'setSearchTitle', 'setSelectedItems']),
+			...mapActions('incidents', ['getHeader', 'getData']),
+			onClickCreateItem() {
+				this.$router.push('/create')
+			},
+			onClickDeleteItem() {
+
+			},
 		}
 	}
 </script>

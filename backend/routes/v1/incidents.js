@@ -1,5 +1,5 @@
 const items = []
-for(i = 0; i < 10; i ++) {
+for(i = 0; i < 100; i ++) {
 	items.push({
 		title: `title${i}`,
 		content: `content${i}`
@@ -7,7 +7,12 @@ for(i = 0; i < 10; i ++) {
 }
 
 exports.gets = async (req, res, next) => {
-	res.json(items)
+	const { page, perPage } = req.params
+	res.json({
+		items: items.slice((page - 1) * perPage, page * perPage),
+		currentPage: page,
+		totalSize: items.length,
+	})
 }
 
 exports.get = async (req, res, next) => {

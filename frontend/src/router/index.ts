@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import paths from './paths'
-import IRoute from './interface'
+import IRoute from "@/interface/IRoute";
 
 const route = (option: IRoute) => {
   const { path, view, name } = option
@@ -26,7 +26,7 @@ export default new Router({
     }
     return route(option)
   }).concat([
-    { path: '*', redirect: '/home' }
+    { path: '*', redirect: '/home' },
   ]),
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) return savedPosition

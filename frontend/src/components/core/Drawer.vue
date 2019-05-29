@@ -1,8 +1,8 @@
 <template>
    <v-navigation-drawer
-      v-model="drawer"
       fixed
       :mini-variant.sync="this.$store.state.app.mini"
+      width="200px"
       app>
       <v-toolbar flat class="transparent">
           <v-list class="pa-0">
@@ -42,20 +42,4 @@
 
       </v-list>
     </v-navigation-drawer>
-
-    
 </template>
-
-<script>
-  export default {
-    data() {
-      return {
-        drawer: null,
-      };
-    }
-  }
-</script>
-
-<style>
-
-</style>
