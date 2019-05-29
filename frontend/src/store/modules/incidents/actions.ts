@@ -2,7 +2,7 @@ import IPage from "@/interface/IPage";
 import api from "@/utils/api";
 
 export default {
-  getHeader: async ({commit}: any) => {
+  getHeader: ({commit}: any) => {
     commit('initData')
   },
   getData: async ({ commit, getters }: any) => {

@@ -39,15 +39,15 @@ export default {
     };
   },
   beforeMount() {
-    this.getHeader();
+    this.getHeader()
   },
   mounted() {
-    this.getData();
+    this.getData()
   },
   watch: {
     pagination: {
       handler() {
-        this.getData();
+        this.getData()
       },
       deep: true
     }
@@ -64,7 +64,7 @@ export default {
     ]),
     pagination: {
       get() {
-        return this.getPagination;
+        return this.getPagination
       },
       set(pagination) {
         this.setPagination(pagination);

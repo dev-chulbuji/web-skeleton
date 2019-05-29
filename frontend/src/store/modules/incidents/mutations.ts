@@ -1,5 +1,5 @@
 export default {
-	initData: async (state: any) => {
+	initData: (state: any) => {
 		state.headers = [{
 			text: 'title',
 			value: 'title',

@@ -14,13 +14,13 @@
 							<v-text-field
 								disabled
 								type="text" label="title"
-								v-model="getItem.title"/>
+								v-model="item.title"/>
 						</v-flex >
 						<v-flex xs12 d-block>
 							<v-text-field
 								disabled
 								type="text" label="content"
-								v-model="getItem.content"/>
+								v-model="item.content"/>
 						</v-flex>
 					</v-layout>
 					<!-- <v-layout wrap justify-space-between>
@@ -228,14 +228,26 @@
 
 	export default {
 		name: 'DetailIncident',
-		mounted() {
+		beforeMount() {
 			this.initData()
 		},
+		mounted() {
+			this.getData()
+		},
 		computed: {
-			...mapGetters('detail', ['getItem'])
+			...mapGetters('detail', ['getItem']),
+			item: {
+				get() {
+					return this.getItem
+				},
+				set(payload) {
+					this.setItem(payload)
+				}
+			}
 		},
 		methods: {
-			...mapActions('detail', ['initData']),
+			...mapMutations('detail', ['setItem']),
+			...mapActions('detail', ['getData', 'initData']),
 			cancel() {
 				this.$router.replace(this.$route.query.redirect || '/')
 			}
