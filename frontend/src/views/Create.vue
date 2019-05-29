@@ -10,6 +10,20 @@
 			<v-container grid-list-lg>
 				<v-form ref="form">
 					<v-layout wrap justify-space-between>
+						<v-flex xs12 d-block>
+							<v-text-field
+								type="text" label="title"
+								:rules="getRequest.title.rules"
+								v-model="getRequest.title.value"/>
+						</v-flex >
+						<v-flex xs12 d-block>
+							<v-text-field
+								type="text" label="content"
+								:rules="getRequest.content.rules"
+								v-model="getRequest.content.value"/>
+						</v-flex>
+					</v-layout>
+					<!-- <v-layout wrap justify-space-between>
 						<v-flex xs6 d-block>
 							<v-text-field
 								type="text" label="Incident Number"/>
@@ -194,7 +208,7 @@
 								:rules="getRequest.memo.rules"
 								v-model="getRequest.memo.value"/>
 						</v-flex>
-					</v-layout>
+					</v-layout> -->
 
 					<v-layout>
 						<v-spacer></v-spacer>
@@ -233,10 +247,11 @@
 			...mapGetters('create', ['getRequest'])
 		},
 		methods: {
+			...mapActions('create', ['createItem']),
 			...mapMutations('create', ['initData']),
 			create() {
 				if (this.$refs.form.validate()) {
-
+					this.createItem()
 				}
 			},
 			cancel() {
