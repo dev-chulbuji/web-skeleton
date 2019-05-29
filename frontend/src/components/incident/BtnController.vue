@@ -29,7 +29,9 @@ export default Vue.extend({
     onClickCreateItem() {
       this.$router.push("/create");
     },
-    onClickDeleteItem() {}
+    onClickDeleteItem() {
+
+    }
   }
 });
 </script>

@@ -2,7 +2,7 @@
 	<v-card class="elevation-1">
 		
 		<incident-btn-controller></incident-btn-controller>
-		<search-incident></search-incident>
+		<incident-search></incident-search>
 
 		<v-data-table
 			:headers="getHeaders"
