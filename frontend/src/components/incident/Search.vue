@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-	<v-container grid-list-md>
+	<v-container grid-list-md style="padding: 4em 0">
 		<v-layout wrap>
-			<v-flex xs11>
+			<v-flex xs8 offset-xs2>
 				<v-text-field label="증상" type="text" v-model="searchTitle"></v-text-field>
 			</v-flex>
 			<v-flex xs1>

@@ -26,11 +26,12 @@ export default Vue.extend({
   },
   methods: {
     ...mapMutations('incidents', ['setSelectedItems']),
+		...mapMutations('confirm', ['setVisible']),
     onClickCreateItem() {
       this.$router.push("/create");
     },
     onClickDeleteItem() {
-
+			this.setVisible(true)
     }
   }
 });

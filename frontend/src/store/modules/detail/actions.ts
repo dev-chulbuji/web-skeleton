@@ -6,11 +6,11 @@ export default {
     commit('initData')
   },
   getData: async ({ commit, getters }: any) => {
-    const { idx } = getters.getItem
+    const { _id } = getters.getItem
 
     commit('setLoading', true)
 
-    const response = await api.get(`/incidents/${idx}`)
+    const response = await api.get(`/incidents?id=${_id}`)
     const data = response.data
 
     commit('setItem', data)

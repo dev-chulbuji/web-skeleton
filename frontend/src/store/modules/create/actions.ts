@@ -2,24 +2,28 @@ import IPage from "@/interface/IPage";
 import api from "@/utils/api";
 
 export default {
-  createItem: async ({ commit, getters }: any) => {
-    const { title, content } = getters.getRequest
+	createItem: async ({commit, getters}: any) => {
+		const request = getters.getRequest
+		const item = {}
 
-    commit('setLoading', true)
+		Object.keys(request).forEach((x: string) => {
+			const key = x
+			const value = request[x].value
+			Object.assign(item, { [key]: value })
+		})
 
-    const response = await api.post(`/incidents`, {
-      headers: { 'Content-type': 'application/x-www-form-urlencoded' },
-      title: title.value, 
-      content: content.value,
-    })
-    const { data } = response.data
+		commit('setLoading', true)
 
-    if (data > 0) {
+		const response = await api.post(`/incidents`, { ...item })
+		const {data} = response.data
 
-    } else {
+		if (data > 0) {
 
-    }
+		} else {
 
-    commit('setLoading', false)
-  }
+		}
+
+		commit('setLoading', false)
+		commit('setCreateDone', true)
+	}
 }

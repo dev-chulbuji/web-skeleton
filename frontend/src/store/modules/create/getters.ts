@@ -1,3 +1,4 @@
 export default {
-  getRequest: (state: any) => state.request
+  getRequest: (state: any) => state.request,
+  getCreateDone: (state: any) => state.createDone,
 }
