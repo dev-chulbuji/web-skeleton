@@ -1,5 +1,6 @@
 const incidentDAO = require('../../models/incident')
 const incidentHistoryDAO = require('../../models/history')
+const dateFormat = require('../../utils/format').dateFormat
 
 exports.getList = async (req, res, next) => {
 	const { page = 1, total = 10 } = req.params

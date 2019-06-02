@@ -49,19 +49,19 @@ export default {
 				rules: [(v: any) => !!v || '필수입력 사항입니다.']
 			},
 			occured_at: {
-				value: '2019/03/14 06:06',
+				value: '2019-03-14',
 				rules: [(v: any) => !!v || '필수입력 사항입니다.']
 			},
 			fined_at: {
-				value: '2019/03/14 06:06',
+				value: '2019-03-14',
 				rules: [(v: any) => !!v || '필수입력 사항입니다.']
 			},
 			actioned_at: {
-				value: '2019/03/14 06:06',
+				value: '2019-03-14',
 				rules: [(v: any) => !!v || '필수입력 사항입니다.']
 			},
 			solved_at: {
-				value: '2019/03/14 06:06',
+				value: '2019-03-14',
 				rules: [(v: any) => !!v || '필수입력 사항입니다.']
 			},
 			finder: {

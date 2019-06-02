@@ -152,7 +152,7 @@
 					<v-layout>
 						<v-spacer></v-spacer>
 						<v-btn color="error" dark @click="cancel">
-							Incidents List
+							Show Incidents List
 							<v-icon right dark>cancel</v-icon>
 						</v-btn>
 					</v-layout>

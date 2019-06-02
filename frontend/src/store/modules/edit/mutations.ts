@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export default {
 	initData: (state: any) => {
 		state.item.symptom = {
@@ -74,7 +76,7 @@ export default {
 		const item = {}
 		Object.keys(state.item).forEach((x: string) => {
 			const key = x
-			const value = payload[key]
+			const value = key.includes('_at') ? moment(payload[key]).format('YYYY-MM-DD') : payload[key]
 			const rule = state.item[key].rule
 
 			item[key] = { value, rule }
