@@ -48,10 +48,10 @@
 			};
 		},
 		beforeMount() {
-			this.getHeader()
+			this.initData
 		},
 		mounted() {
-			this.getData()
+			this.getData
 		},
 		created() {
 		},
@@ -70,7 +70,6 @@
 				"getSelectedItems",
 				"getPagination",
 				"getTotal",
-				"getSearchTitle",
 				"isLoading"
 			]),
 			items: {
@@ -107,7 +106,7 @@
 				"setSelectedItems",
 			]),
 			...mapMutations('detail', ['setItem']),
-			...mapActions("incidents", ["getHeader", "getData"]),
+			...mapActions("incidents", ["getHeader", "getData", "initData"]),
 			computeSymptom(item) {
 				if (item.symptom.length > 70) {
 					return item.symptom.substr(0, 70) + '...'

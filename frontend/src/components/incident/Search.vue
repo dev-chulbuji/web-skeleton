@@ -2,7 +2,11 @@
 	<v-container grid-list-md style="padding: 4em 0">
 		<v-layout wrap>
 			<v-flex xs8 offset-xs2>
-				<v-text-field label="증상" type="text" v-model="searchTitle"></v-text-field>
+				<v-text-field
+					label="증상"
+					type="text"
+					v-model="searchTitle"
+					v-on:keyup.enter="onClickSearch"/>
 			</v-flex>
 			<v-flex xs1>
 				<v-tooltip top>
@@ -20,37 +24,28 @@
 </template>
 
 <script>
-	import {mapMutations, mapActions} from 'vuex'
+	import {mapMutations, mapActions, mapGetters} from 'vuex'
 
 	export default {
 		name: 'IncidentSearch',
-		data() {
-			return {
-				searchTitle: ''
-			}
-		},
 		computed: {
-			get() {
-				return this.searchTitle
-			},
-			set(value) {
-				console.log(value)
-
+			...mapGetters('incidents', ['getSearchTitle']),
+			searchTitle: {
+				get() {
+					return this.getSearchTitle
+				},
+				set(value) {
+					this.setSearchTitle(value)
+				}
 			}
 		},
 		methods: {
 			...mapMutations('incidents', ['setSearchTitle', 'setPaginationPage']),
 			...mapActions('incidents', ['getData']),
 			onClickSearch() {
-				this.setSearchTitle(this.searchTitle)
+				this.setSearchTitle(this.getSearchTitle)
 				this.setPaginationPage(1)
 			},
-			onClickCreateItem() {
-				console.log('create incident')
-			},
-			onClickDeletItem() {
-
-			}
 		}
 	};
 </script>

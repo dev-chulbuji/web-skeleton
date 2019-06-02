@@ -49,8 +49,16 @@ Incident.statics.get = async function (id) {
 	return this.findOne({_id: id}).exec()
 }
 
-Incident.statics.getList = async function (page, total) {
-	return this.find()
+Incident.statics.getList = async function (page, total, query) {
+	let mg = ''
+	if (query && query.length > 0) {
+		const queryStr = new RegExp(query, 'i')
+		const queryBuilder = { symptom: queryStr }
+		mg = this.find(queryBuilder)
+	} else {
+		mg = this.find()
+	}
+	return mg
 		.skip(total * (page - 1))
 		.limit(total)
 		.sort({created_at: 'desc'})

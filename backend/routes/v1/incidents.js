@@ -4,11 +4,15 @@ const dateFormat = require('../../utils/format').dateFormat
 
 exports.getList = async (req, res, next) => {
 	const { page = 1, total = 10 } = req.params
+	const { query } = req.query
+
+	console.log(query)
+
 	const addOnItemCount = 5 // 삭제를 위해 추가 아이템
 	const rowsPerPage = Number.parseInt(total) + addOnItemCount
 
 	try {
-		const items = await incidentDAO.getList(page, rowsPerPage)
+		const items = await incidentDAO.getList(page, rowsPerPage, query)
 		const totalSize = await incidentDAO.getTotal()
 
 		const rtv = {

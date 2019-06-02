@@ -1,7 +1,7 @@
 import api from "@/utils/api";
 
 export default {
-	getHeader: ({commit}: any) => {
+	initData: ({commit}: any) => {
 		commit('initData')
 	},
 	getData: async ({commit, getters}: any) => {
@@ -10,7 +10,12 @@ export default {
 
 		commit('setLoading', true)
 
-		const response = await api.get(`/incidents/${page}/${rowsPerPage}`)
+		let url = `/incidents/${page}/${rowsPerPage}`
+
+		if (searchTitle.length > 0) {
+			url += `?query=${searchTitle}`
+		}
+		const response = await api.get(url)
 		const {items, currentPage, totalSize} = response.data
 
 		const renderedItems = items.slice(0, rowsPerPage)

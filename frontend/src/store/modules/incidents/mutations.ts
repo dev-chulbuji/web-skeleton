@@ -36,6 +36,7 @@ export default {
 			sortBy: '',
 			totalItems: 0
 		}
+		state.searchTitle = ''
 	},
 	setLoading: (state: any, payload: boolean) => state.loading = payload,
 	setTotal: (state: any, payload: number) => state.total = payload,
