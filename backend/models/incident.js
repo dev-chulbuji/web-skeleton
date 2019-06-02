@@ -22,59 +22,58 @@ const Incident = new Schema({
 	 */
 	// responsibility_person: { type: Number },
 	// responsibility_part: { type: Number },
-	responsibility_person: { type: String },
-	responsibility_part: { type: String },
-	symptom: { type: String },
-	cause: { type: String },
-	action: { type: String },
-	target_device: { type: String },
-	effect: { type: String },
-	prevention_way: { type: String },
-	find_cause_way: { type: String },
-	recognition_way: { type: String },
+	responsibility_person: {type: String},
+	responsibility_part: {type: String},
+	symptom: {type: String},
+	cause: {type: String},
+	action: {type: String},
+	target_device: {type: String},
+	effect: {type: String},
+	prevention_way: {type: String},
+	find_cause_way: {type: String},
+	recognition_way: {type: String},
 
-	memo: { type: String },
+	memo: {type: String},
 	// finder: { type: Number },
-	finder: { type: String },
-	occured_at: { type: Date, required: true },
-	fined_at: { type: Date, required: true },
-	actioned_at: { type: Date, required: true },
-	solved_at: { type: Date, required: true },
-	created_at: { type: Date, default: Date.now },
-	updated_at: { type: Date, default: Date.now },
+	finder: {type: String},
+	occured_at: {type: Date, required: true},
+	fined_at: {type: Date, required: true},
+	actioned_at: {type: Date, required: true},
+	solved_at: {type: Date, required: true},
+	created_at: {type: Date, default: Date.now},
+	updated_at: {type: Date, default: Date.now},
 })
 
 
 Incident.statics.get = async function (id) {
-	return this.findOne({ _id: id }).exec()
+	return this.findOne({_id: id}).exec()
 }
 
 Incident.statics.getList = async function (page, total) {
 	return this.find()
-	.skip(total * (page - 1))
-	.limit(total)
-	.sort({ created_at: 'desc' })
-	.exec()
+		.skip(total * (page - 1))
+		.limit(total)
+		.sort({created_at: 'desc'})
+		.exec()
 }
 
 Incident.statics.getTotal = async function (page, total) {
-	return this.count()
+	return this.collection.countDocuments()
 }
 
 Incident.statics.create = async function (option) {
-	console.log(option)
 	const item = new this(option)
 	return item.save()
 }
 
 Incident.statics.delete = async function (option) {
-	const { id } = option
+	const {id} = option
 	return this.findByIdAndRemove(id).exec()
 }
 
 Incident.statics.put = async function (option) {
-	const { id } = option
-	return this.updateOne({ _id: id}, option).exec()
+	const { _id } = option
+	return this.updateOne({ _id }, option).exec()
 }
 
 module.exports = mongoose.model('Incidents', Incident)

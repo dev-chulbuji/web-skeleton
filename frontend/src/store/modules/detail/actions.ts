@@ -11,9 +11,9 @@ export default {
     commit('setLoading', true)
 
     const response = await api.get(`/incidents?id=${_id}`)
-    const data = response.data
+    const { item, histories } = response.data
 
-    commit('setItem', data)
+    commit('setItem', item)
     commit('setLoading', false)
   }
 }

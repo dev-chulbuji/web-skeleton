@@ -2,6 +2,13 @@
 	<v-card>
 		<v-card-title flat class="transparent">
 			<span class="headline">Detail Incident</span>
+
+			<v-spacer />
+
+			<v-btn color="primary" dark @click="onClickEdit">
+				Edit Incident
+				<v-icon right dark>folder_open</v-icon>
+			</v-btn>
 		</v-card-title>
 
 		<v-divider></v-divider>
@@ -13,14 +20,14 @@
 						<v-flex xs6 d-block>
 							<v-text-field
 								disabled
-								v-model="getItem._id"
+								v-model="item._id"
 								type="text" label="Incident Number"/>
 						</v-flex>
 						<v-flex xs6 d-block>
 							<v-text-field
 								disabled
 								type="text" label="발견자"
-								v-model="getItem.finder"/>
+								v-model="item.finder"/>
 						</v-flex>
 						<v-flex xs12 d-block>
 							<v-textarea
@@ -28,7 +35,7 @@
 								type="text" label="증상"
 								auto-grow
 								rows="1"
-								v-model="getItem.symptom"/>
+								v-model="item.symptom"/>
 						</v-flex>
 						<v-flex xs12 d-block>
 							<v-textarea
@@ -36,7 +43,7 @@
 								type="text" label="원인"
 								auto-grow
 								rows="1"
-								v-model="getItem.cause"/>
+								v-model="item.cause"/>
 						</v-flex>
 						<v-flex xs12 d-block>
 							<v-textarea
@@ -44,7 +51,7 @@
 								type="text" label="원인 파악 방법"
 								auto-grow
 								rows="1"
-								v-model="getItem.find_cause_way"/>
+								v-model="item.find_cause_way"/>
 						</v-flex>
 						<v-flex xs12 d-block>
 							<v-textarea
@@ -52,7 +59,7 @@
 								type="text" label="대응"
 								auto-grow
 								rows="1"
-								v-model="getItem.action"/>
+								v-model="item.action"/>
 						</v-flex>
 						<v-flex xs12 d-block>
 							<v-textarea
@@ -60,7 +67,7 @@
 								type="text" label="서비스영향"
 								auto-grow
 								rows="1"
-								v-model="getItem.effect"/>
+								v-model="item.effect"/>
 						</v-flex>
 						<v-flex xs12 d-block>
 							<v-textarea
@@ -68,13 +75,13 @@
 								type="text" label="방지방안"
 								auto-grow
 								rows="1"
-								v-model="getItem.prevention_way"/>
+								v-model="item.prevention_way"/>
 						</v-flex>
 						<v-flex xs6 d-block>
 							<v-text-field
 								disabled
 								type="text" label="대상장비"
-								v-model="getItem.target_device"/>
+								v-model="item.target_device"/>
 						</v-flex>
 						<v-flex xs6 d-block>
 							<v-textarea
@@ -82,55 +89,55 @@
 								type="text" label="인지방법"
 								auto-grow
 								rows="1"
-								v-model="getItem.recognition_way"/>
+								v-model="item.recognition_way"/>
 						</v-flex>
 						<v-flex xs6>
 							<v-text-field
 								disabled
 								type="text" label="담당부서"
-								v-model="getItem.responsibility_person"/>
+								v-model="item.responsibility_person"/>
 						</v-flex>
 						<v-flex xs6>
 							<v-text-field
 								disabled
 								type="text" label="담당자"
-								v-model="getItem.responsibility_part"/>
+								v-model="item.responsibility_part"/>
 						</v-flex>
 						<v-flex xs3>
 							<v-text-field
-										disabled
-										v-model="getItem.fined_at"
-										label="발견일시"
-										prepend-icon="event"
-										readonly
-									></v-text-field>
+								disabled
+								v-model="item.fined_at"
+								label="발견일시"
+								prepend-icon="event"
+								readonly
+							></v-text-field>
 						</v-flex>
 						<v-flex xs3>
 							<v-text-field
-										disabled
-										v-model="getItem.occured_at"
-										label="발생일시"
-										prepend-icon="event"
-										readonly
-									></v-text-field>
+								disabled
+								v-model="item.occured_at"
+								label="발생일시"
+								prepend-icon="event"
+								readonly
+							></v-text-field>
 						</v-flex>
 						<v-flex xs3>
 							<v-text-field
-										disabled
-										v-model="getItem.actioned_at"
-										label="대응일시"
-										prepend-icon="event"
-										readonly
-									></v-text-field>
+								disabled
+								v-model="item.actioned_at"
+								label="대응일시"
+								prepend-icon="event"
+								readonly
+							></v-text-field>
 						</v-flex>
 						<v-flex xs3>
 							<v-text-field
-										disabled
-										v-model="getItem.solved_at"
-										label="해결일시"
-										prepend-icon="event"
-										readonly
-									></v-text-field>
+								disabled
+								v-model="item.solved_at"
+								label="해결일시"
+								prepend-icon="event"
+								readonly
+							></v-text-field>
 						</v-flex>
 						<v-flex xs12>
 							<v-textarea
@@ -138,7 +145,7 @@
 								type="text" label="세부사항"
 								auto-grow
 								rows="1"
-								v-model="getItem.memo"/>
+								v-model="item.memo"/>
 						</v-flex>
 					</v-layout>
 
@@ -179,9 +186,14 @@
 		},
 		methods: {
 			...mapMutations('detail', ['setItem']),
+			...mapMutations('edit', ['setItemId']),
 			...mapActions('detail', ['getData', 'initData']),
 			cancel() {
 				this.$router.replace(this.$route.query.redirect || '/')
+			},
+			onClickEdit() {
+				this.setItemId(this.getItem._id)
+				this.$router.push('/edit')
 			}
 		}
 	}

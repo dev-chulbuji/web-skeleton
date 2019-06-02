@@ -101,7 +101,7 @@ exports.delete = async (req, res, next) => {
 
 exports.put = async (req, res, next) => {
 	const {
-		id,
+		_id,
 		responsibility_person,
 		responsibility_part,
 		symptom,
@@ -121,7 +121,7 @@ exports.put = async (req, res, next) => {
 	} = req.body
 
 	const option = {
-		id,
+		_id,
 		responsibility_person,
 		responsibility_part,
 		symptom,
@@ -141,7 +141,7 @@ exports.put = async (req, res, next) => {
 	}
 
 	try {
-		const incident = await incidentDAO.get(id)
+		const incident = await incidentDAO.get(_id)
 		if (!incident) throw new Error("1000")
 
 		const response = await incidentDAO.put(option)
@@ -166,10 +166,9 @@ exports.put = async (req, res, next) => {
 			solved_at: incident.solved_at,
 		}
 
-
 		await incidentHistoryDAO.create(history)
 
-		res.json({ id })
+		res.json({ _id })
 	} catch (e) {
 		next(e)
 	}

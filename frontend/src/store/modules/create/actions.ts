@@ -3,6 +3,8 @@ import api from "@/utils/api";
 
 export default {
 	createItem: async ({commit, getters}: any) => {
+		commit('setLoading', true)
+
 		const request = getters.getRequest
 		const item = {}
 
@@ -11,8 +13,6 @@ export default {
 			const value = request[x].value
 			Object.assign(item, { [key]: value })
 		})
-
-		commit('setLoading', true)
 
 		const response = await api.post(`/incidents`, { ...item })
 		const {data} = response.data

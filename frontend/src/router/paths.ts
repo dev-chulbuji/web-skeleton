@@ -14,8 +14,8 @@ const paths: IRoute[] = [
     view: 'Detail'
   },
   {
-    path: '/analytics',
-    view: 'Analytics'
+    path: '/edit',
+    view: 'Edit'
   },
 ]
 
